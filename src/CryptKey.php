@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Cryptography key holder.
  *
@@ -17,7 +18,7 @@ class CryptKey
 {
     /** @deprecated left for backward compatibility check */
     const RSA_KEY_PATTERN =
-        '/^(-----BEGIN (RSA )?(PUBLIC|PRIVATE) KEY-----)\R.*(-----END (RSA )?(PUBLIC|PRIVATE) KEY-----)\R?$/s';
+    '/^(-----BEGIN (RSA )?(PUBLIC|PRIVATE) KEY-----)\R.*(-----END (RSA )?(PUBLIC|PRIVATE) KEY-----)\R?$/s';
 
     private const FILE_PREFIX = 'file://';
 
@@ -67,20 +68,20 @@ class CryptKey
             throw new LogicException('Unable to read key from file ' . $keyPath);
         }
 
-        if ($keyPermissionsCheck === true) {
-            // Verify the permissions of the key
-            $keyPathPerms = \decoct(\fileperms($this->keyPath) & 0777);
-            if (\in_array($keyPathPerms, ['400', '440', '600', '640', '660'], true) === false) {
-                \trigger_error(
-                    \sprintf(
-                        'Key file "%s" permissions are not correct, recommend changing to 600 or 660 instead of %s',
-                        $this->keyPath,
-                        $keyPathPerms
-                    ),
-                    E_USER_NOTICE
-                );
-            }
-        }
+        // if ($keyPermissionsCheck === true) {
+        //     // Verify the permissions of the key
+        //     $keyPathPerms = \decoct(\fileperms($this->keyPath) & 0777);
+        //     if (\in_array($keyPathPerms, ['400', '440', '600', '640', '660'], true) === false) {
+        //         \trigger_error(
+        //             \sprintf(
+        //                 'Key file "%s" permissions are not correct, recommend changing to 600 or 660 instead of %s',
+        //                 $this->keyPath,
+        //                 $keyPathPerms
+        //             ),
+        //             E_USER_NOTICE
+        //         );
+        //     }
+        // }
     }
 
     /**
